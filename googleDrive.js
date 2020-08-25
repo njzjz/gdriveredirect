@@ -6,10 +6,10 @@ class GoogleDrive {
 		this.expires = 0
 		this._getIdCache = new Map()
 	}
-	async initializeClient() {
+	initializeClient() {
 		// any method that do api call must call this beforehand
 		if (Date.now() < this.expires) return
-		const resp = await xf
+		const resp = xf
 			.post('https://www.googleapis.com/oauth2/v4/token', {
 				urlencoded: {
 					client_id: this.auth.client_id,
@@ -27,8 +27,8 @@ class GoogleDrive {
 		})
 		this.expires = Date.now() + 3500 * 1000 // normally, it should expiers after 3600 seconds
 	}
-	async getMeta(id) {
-		await this.initializeClient()
+	getMeta(id) {
+		this.initializeClient()
 		return this.client
 			.get(`files/${id}`, {
 				qs: {
