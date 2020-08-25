@@ -17,12 +17,10 @@ app.use('/', async (req, res) => {
 	oauth2Client.setCredentials({
 		refresh_token: process.env.token
 	});
-	oauth2Client.on('tokens', (tokens) => {
-		var access_token = tokens.access_token;
-		var redirect_url = `https://www.googleapis.com/drive/v3/files/get?fileId=${url}&alt=media&access_token=${access_token}`;
-		res.header('Authorization', 'Bearer '+ access_token);
-		res.redirect(302, redirect_url);
-	});
+	var access_token = await oauth2Client.getAccessToken();
+	var redirect_url = `https://www.googleapis.com/drive/v3/files/get?fileId=${url}&alt=media&access_token=${access_token}`;
+	res.header('Authorization', 'Bearer '+ access_token);
+	res.redirect(302, redirect_url);
 });
 
 module.exports = app;
