@@ -23,5 +23,6 @@ app.use('/', async (req, res) => {
 		res.header('Authorization', 'Bearer '+ access_token);
 		res.redirect(302, redirect_url);
 	});
+});
 
 module.exports = app;
