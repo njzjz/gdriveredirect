@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "xfetch-js": "^0.5.0"
   },
   "devDependencies": {},
   "scripts": {

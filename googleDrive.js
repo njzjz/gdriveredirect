@@ -1,4 +1,4 @@
-import xf from './xfetch'
+import xf from 'xfetch-js'
 
 class GoogleDrive {
 	constructor(auth) {
