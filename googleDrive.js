@@ -1,4 +1,4 @@
-import xf from 'xfetch-js'
+xf = require('xfetch-js')
 
 class GoogleDrive {
 	constructor(auth) {
@@ -40,4 +40,4 @@ class GoogleDrive {
 			.json()
 	}
 }
-export default GoogleDrive
+module.exports = GoogleDrive
