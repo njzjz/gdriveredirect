@@ -6,7 +6,7 @@ const gd = new GoogleDrive({
 	client_secret: 'X4Z3ca8xfWDb1Voo-F9a7ZxJ',
 	refresh_token: process.env.token
 })
-app.use('/', async (req, res) {
+app.use('/', async (req, res) => {
 	var url = req.originalUrl.replace('/', '');
 	const result = await gd.getMeta(url);
 	const newurl = result.webViewLink;
