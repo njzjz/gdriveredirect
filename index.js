@@ -16,11 +16,18 @@ app.use('/', (req, res) => {
 		auth: oauth2Client,
 	});
 	var url = req.originalUrl.replace('/', '');
+	if (!url){
+		res.redirect(302, "https://njzjz.win/");
+		return;
+	}
 	const result = drive.files.get({
-		fileId: url
+		fileId: url,
+		fields: 'webContentLink',
+		//alt: 'media',
 	});
-	//const newurl = result.webViewLink;
-	//res.redirect(302, newurl);
-	res.send(result);
+	result.then(function(res){
+		const newurl = res.data.webContentLink;
+		res.redirect(302, newurl);
+	})
 })
 module.exports = app;
