@@ -14,9 +14,9 @@ app.use('/', (req, res) => {
 	const drive = google.drive({
 		version: 'v3',
 		auth: oauth2Client,
-	})
+	});
 	var url = req.originalUrl.replace('/', '');
-	const result = drive.get({
+	const result = drive.files.get({
 		fileId: url
 	});
 	//const newurl = result.webViewLink;
