@@ -3,29 +3,25 @@ const express = require('express');
 var app = express();
 
 app.use('/', async (req, res) => {
+	var url = req.originalUrl.replace('/', '');
+	if (!url){
+		res.redirect(302, "https://njzjz.win/");
+		return;
+	}
+
 	const oauth2Client = new google.auth.OAuth2(
 		'202264815644.apps.googleusercontent.com',
 		'X4Z3ca8xfWDb1Voo-F9a7ZxJ',
 		''
 	);
 	oauth2Client.setCredentials({
-		  refresh_token: process.env.token
+		refresh_token: process.env.token
 	});
-	const drive = google.drive({
-		version: 'v3',
-		auth: oauth2Client,
+	oauth2Client.on('tokens', (tokens) => {
+		var access_token = tokens.access_token;
+		var redirect_url = `https://www.googleapis.com/drive/v3/files/get?fileId=${url}&alt=media&access_token=${access_token}`;
+		res.header('Authorization', 'Bearer '+ access_token);
+		res.redirect(302, redirect_url);
 	});
-	var url = req.originalUrl.replace('/', '');
-	if (!url){
-		res.redirect(302, "https://njzjz.win/");
-		return;
-	}
-	const result = await drive.files.get({
-		fileId: url,
-		fields: 'webContentLink',
-		//alt: 'media',
-	});
-	const newurl = result.data.webContentLink;
-	res.redirect(302, newurl);
-})
+
 module.exports = app;
