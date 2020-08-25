@@ -1,4 +1,3 @@
-import mime from 'mime'
 import GoogleDrive from './googleDrive'
 var express = require('express');
 var app = express();
