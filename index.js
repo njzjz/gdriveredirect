@@ -18,8 +18,9 @@ app.use('/', async (req, res) => {
 		refresh_token: process.env.token
 	});
 	var access_token = await oauth2Client.getAccessToken();
-	var redirect_url = `https://www.googleapis.com/drive/v3/files/get?fileId=${url}&alt=media&access_token=${access_token}`;
-	res.header('Authorization', 'Bearer '+ access_token);
+	var token = access_token.token;
+	var redirect_url = `https://www.googleapis.com/drive/v3/files/get?fileId=${url}&alt=media&access_token=${token}`;
+	res.header('Authorization', 'Bearer '+ token);
 	res.redirect(302, redirect_url);
 });
 
