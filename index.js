@@ -1,5 +1,5 @@
-import GoogleDrive from './googleDrive'
-var express = require('express');
+const GoogleDrive = require('./googleDrive')'
+const express = require('express');
 var app = express();
 const gd = new GoogleDrive({
 	client_id: '202264815644.apps.googleusercontent.com',
