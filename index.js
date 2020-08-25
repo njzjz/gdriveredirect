@@ -10,6 +10,7 @@ app.use('/', function (req, res) {
 	var url = req.originalUrl.replace('/', '');
 	const result = gd.getMeta(url);
 	const newurl = result.webViewLink;
-	res.redirect(302, newurl);
+	//res.redirect(302, newurl);
+	res.send(result);
 })
 module.exports = app;
