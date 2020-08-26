@@ -24,6 +24,8 @@ app.use('/', async (req, res) => {
 		fileId: url,
 		fields: 'webContentLink',
 		//alt: 'media',
+	}).catch(error => {
+		res.redirect(302, 'https://njzjz.win/404.html');
 	});
 	if ( result.data && result.data.webContentLink ){
 		const newurl = result.data.webContentLink;
