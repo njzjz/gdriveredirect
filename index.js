@@ -25,7 +25,11 @@ app.use('/', async (req, res) => {
 		fields: 'webContentLink',
 		//alt: 'media',
 	});
-	const newurl = result.data.webContentLink;
-	res.redirect(302, newurl);
+	if ( result.data && result.data.webContentLink ){
+		const newurl = result.data.webContentLink;
+		res.redirect(302, newurl);
+	} else {
+		res.redirect(302, 'https://njzjz.win/404.html');
+	}
 })
 module.exports = app;
